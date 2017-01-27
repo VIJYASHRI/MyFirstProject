@@ -1,0 +1,6 @@
+controller\PersonController.class
+controller\HelloController.class
+controller\HomeController.class
+controller\ProductController.class
+MVCdemo\Person.class
+MVCdemo\Product.class

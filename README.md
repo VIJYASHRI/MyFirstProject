@@ -1,1 +1,1 @@
-# IoC USING Setter and Getter
+# Spring MVC Demo Project
