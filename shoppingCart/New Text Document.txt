@@ -1,0 +1,35 @@
+Feb 14, 2017 12:24:00 PM org.apache.catalina.core.StandardContext listenerStart
+SEVERE: Exception sending context initialized event to listener instance of class org.springframework.web.context.ContextLoaderListener
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController': Unsatisfied dependency expressed through field 'productService'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.niit.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:588)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+
+soln: @service is added
+=====================================================================
+
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productServiceImpl': Unsatisfied dependency expressed through field 'productDao'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productDaoImpl' defined in file [C:\Users\VIJYA SHRI\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\shoppingCart\WEB-INF\classes\com\niit\dao\ProductDaoImpl.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory' defined in ServletContext resource [/WEB-INF/applicationContext.xml]: Cannot resolve reference to bean 'dataSource' while setting bean property 'dataSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in ServletContext resource [/WEB-INF/applicationContext.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'driverClassName' threw exception; nested exception is java.lang.IllegalStateException: Could not load JDBC driver class [org.h2.Driver]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:588)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+soln: dependencies are added( spring tx,spring aop,..)
+
+
+C:\Users\VIJYA SHRI\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\shoppingCart\WEB-INF\
+
+==========================================
+
+INFO: No Spring WebApplicationInitializer types detected on classpath      "log4j.properties"
+=============================================================================
+
+ Error creating bean with name 'sessionFactory' defined in ServletContext resource [/WEB-INF/applicationContext.xml]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: mappedBy reference an unknown target entity property: com.niit.model.Product.category in com.niit.model.Category.products
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1589)
+log4j:ERROR setFile(null,true) call failed.
+java.io.FileNotFoundException: C:\Users\VIJYA SHRI\workspace\shoppingCart (Access is denied)
+
+soln:@autowiered done in homecontoller and
+
+productController
+@Autowired
+private CategoryService categoryService;
+
+model.addAttribute("categories",categoryService.getCategory());
